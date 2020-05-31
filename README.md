@@ -9,13 +9,13 @@ Git Branching Startegy:
 Commands
 -------------
 
-git checkout -b feature-d0322948
+git checkout -b AIT-4
 
-git push origin feature-1
+git push origin AIT-4
 
 git branch -a
 
-git remote add develop-d0114032020 feature-1
+git remote add AIT-4
 
 git status
 
@@ -42,10 +42,8 @@ Flow Diagram
 master 
 
       => develop-ready 
-	     
-		    => develop-d0114032020 
-			 
-			          => <feature>
+  
+		    => <Jira Ticket like AIT-4>
 
 master (Deploy in Prod)
 
@@ -53,6 +51,14 @@ develop-ready (Deploy in QA/Dev)
 
 
 Every month there will be new branch from develop-ready.
+
+// delete branch locally
+
+git branch -d localBranchName
+
+// delete branch remotely
+
+git push origin --delete remoteBranchName
 
 
 Travis-CI
