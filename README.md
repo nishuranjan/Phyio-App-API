@@ -53,9 +53,11 @@ develop-ready (Deploy in QA/Dev)
 Every month there will be new branch from develop-ready.
 
 // delete branch locally
+
 git branch -d localBranchName
 
 // delete branch remotely
+
 git push origin --delete remoteBranchName
 
 
