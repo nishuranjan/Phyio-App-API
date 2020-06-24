@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from core.models import Tag, Recipe
+from core.models import Tag, Ingredient, Recipe
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -12,21 +12,21 @@ class TagSerializer(serializers.ModelSerializer):
         read_only_fields = ('id',)
 
 
-# class IngredientSerializer(serializers.ModelSerializer):
-#    ""Serializer for ingredient objects""
+class IngredientSerializer(serializers.ModelSerializer):
+    """Serializer for ingredient objects"""
 
-#    class Meta:
-#        model = Ingredient
-#        fields = ('id', 'name')
-#        read_only_fields = ('id',)
+    class Meta:
+        model = Ingredient
+        fields = ('id', 'name')
+        read_only_fields = ('id',)
 
 
 class RecipeSerializer(serializers.ModelSerializer):
     """Serialize a recipe"""
-   # ingredients = serializers.PrimaryKeyRelatedField(
-   #     many=True,
-   #     queryset=Ingredient.objects.all()
-   # )
+    ingredients = serializers.PrimaryKeyRelatedField(
+        many=True,
+        queryset=Ingredient.objects.all()
+    )
     tags = serializers.PrimaryKeyRelatedField(
         many=True,
         queryset=Tag.objects.all()
@@ -35,7 +35,7 @@ class RecipeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Recipe
         fields = (
-            'id', 'title', 'tags', 'time_minutes',
+            'id', 'title', 'ingredients', 'tags', 'time_minutes',
             'price', 'link'
         )
         read_only_fields = ('id',)
@@ -43,5 +43,14 @@ class RecipeSerializer(serializers.ModelSerializer):
 
 class RecipeDetailSerializer(RecipeSerializer):
     """Serialize a recipe detail"""
-   # ingredients = IngredientSerializer(many=True, read_only=True)
+    ingredients = IngredientSerializer(many=True, read_only=True)
     tags = TagSerializer(many=True, read_only=True)
+
+
+class RecipeImageSerializer(serializers.ModelSerializer):
+    """Serializer for uploading images to recipes"""
+
+    class Meta:
+        model = Recipe
+        fields = ('id', 'image')
+        read_only_fields = ('id',)
