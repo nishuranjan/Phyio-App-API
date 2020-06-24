@@ -1,5 +1,6 @@
 import uuid
 import os
+
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, \
                                         PermissionsMixin
@@ -13,7 +14,7 @@ def recipe_image_file_path(instance, filename):
 
     return os.path.join('uploads/recipe/', filename)
 
-
+  
 class UserManager(BaseUserManager):
 
     def create_user(self, email, password=None, **extra_fields):
